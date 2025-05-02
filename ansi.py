@@ -1,19 +1,27 @@
+# https://matplotlib.org/stable/gallery/pie_and_polar_charts/polar_demo.html
+
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 
-r = np.arange(0, 2, 0.01)
-fdfd
-#r = np.arange(0, 2, 0.01)
-#r = list(range(0, 20, 0.1))/10
-r = [0, 0.2, 0.4, 0.6, 0.8, 1.0]
-theta = 2 * np.pi * r
+r_max = 100
+r0 = 50
+dr = 25
+theta = np.arange(0, 1*np.pi+0.01, np.pi/100)
+type(theta)               # https://numpy.org/doc/2.2/reference/generated/numpy.ndarray.html
 
+r = np.zeros(len(theta))  # https://numpy.org/doc/2.2/reference/generated/numpy.matlib.zeros.html
+r0 = 50
+for i in range(len(theta)):
+    r[i] = r0 + random.randint(-5,5)
+    r0 = r[i]
+    
 fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
 ax.plot(theta, r)
-ax.set_rmax(2)
-ax.set_rticks([0.5, 1, 1.5, 2])  # Less radial ticks
+ax.set_rmax(r_max)
+ax.set_rticks(list(range(dr,r_max+1,dr)))  # Less radial ticks
 ax.set_rlabel_position(-22.5)  # Move radial labels away from plotted line
 ax.grid(True)
 
-ax.set_title("A line plot on a polar axis", va='bottom')
+ax.set_title("Distance radar", va='top')
 plt.show()
